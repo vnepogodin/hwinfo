@@ -1,20 +1,25 @@
+execute_process(COMMAND lex isdn_cdb.lex
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+
 add_executable(mk_isdnhwdb
    cdb_read.c
    mk_isdnhwdb.c
    )
 
-add_custom_command(
-    TARGET mk_isdnhwdb
-    PRE_BUILD
-    COMMAND lex isdn_cdb.lex
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-
+#add_custom_command(
+#    OUTPUT lex.yy.c
+#    #TARGET mk_isdnhwdb
+#    #PRE_BUILD
+#    COMMAND lex isdn_cdb.lex
+#    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#)
 
 add_executable(isdn_cdb
    cdb_read.c
    isdn_cdb.c
    )
+add_dependencies(isdn_cdb mk_isdnhwdb)
 
 add_custom_command(
     TARGET isdn_cdb
