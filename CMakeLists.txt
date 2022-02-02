@@ -6,6 +6,8 @@ project(hd
 
 include(GNUInstallDirs)
 
+add_subdirectory(src/isdn)
+
 ###
 ### hd library
 ###
@@ -101,9 +103,10 @@ set(LIB_SOURCES
     src/hd/pcmcia.c
     src/hd/pppoe.c
     src/hd/hd.c
+    src/isdn/cdbisdn.c
 )
 
-include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd)
+include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd src/isdn)
 
 add_library(hd STATIC ${LIB_SOURCES} ${LIB_HEADERS})
 add_library(hd::hd ALIAS hd)
