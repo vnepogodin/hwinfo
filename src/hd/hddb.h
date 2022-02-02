@@ -1,6 +1,10 @@
 #ifndef HDDB_H
 #define HDDB_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "hd.h"
 
 void hddb_init(hd_data_t *hd_data);
@@ -10,5 +14,9 @@ unsigned sub_device_class(hd_data_t *hd_data, unsigned vendor, unsigned device, 
 
 char *hid_tag_name(int tag);
 char *hid_tag_name2(int tag);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* HDDB_H */

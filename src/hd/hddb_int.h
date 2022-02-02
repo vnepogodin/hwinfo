@@ -1,3 +1,10 @@
+#ifndef HDDB_INT_H
+#define HDDB_INT_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  *
  * type defs for internal data base
@@ -54,3 +61,8 @@ static char *hddb_entry_strings[] = {
   "driver.mouse", "driver.display", "driver.any"
 };
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* HDDB_INT_H */
