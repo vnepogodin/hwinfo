@@ -110,7 +110,7 @@ include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd src/isdn)
 
 add_library(hd STATIC ${LIB_SOURCES} ${LIB_HEADERS})
 add_library(hd::hd ALIAS hd)
-target_link_libraries(hd STATIC isdn::isdn)
+target_link_libraries(hd isdn::isdn)
 
 install(TARGETS hd
   LIBRARY DESTINATION lib
