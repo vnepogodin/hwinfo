@@ -1,0 +1,14 @@
+#ifndef VERSION_H
+#define VERSION_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define HD_VERSION_STRING "@PROJECT_VERSION@"
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* VERSION_H */
