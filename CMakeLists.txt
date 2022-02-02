@@ -60,7 +60,6 @@ set(LIB_HEADERS
     src/hd/pppoe.h
     src/hd/pcmcia.h
     src/hd/hd.h
-    src/ids/hd_ids.h
 )
 
 set(LIB_SOURCES
@@ -114,7 +113,8 @@ include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd src/isdn src/ids)
 
 add_library(hd STATIC ${LIB_SOURCES} ${LIB_HEADERS})
 add_library(hd::hd ALIAS hd)
-target_link_libraries(hd isdn::isdn ids::ids)
+target_link_libraries(hd isdn::isdn)
+add_dependencies(hd check_hd)
 
 install(TARGETS hd
   LIBRARY DESTINATION lib
