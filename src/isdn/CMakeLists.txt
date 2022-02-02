@@ -2,6 +2,7 @@ add_subdirectory(cdb EXCLUDE_FROM_ALL)
 
 set(LIB_SOURCES
     cdbisdn.c
+    isa_probe.c
 )
 
 include_directories(${PROJECT_BINARY_DIR}/src/hd ${CMAKE_CURRENT_PROJECT_DIR}../hd)

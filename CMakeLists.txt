@@ -7,6 +7,7 @@ project(hd
 include(GNUInstallDirs)
 
 add_subdirectory(src/isdn EXCLUDE_FROM_ALL)
+add_subdirectory(src/ids EXCLUDE_FROM_ALL)
 
 ###
 ### hd library
@@ -59,6 +60,7 @@ set(LIB_HEADERS
     src/hd/pppoe.h
     src/hd/pcmcia.h
     src/hd/hd.h
+    src/ids/hd_ids.h
 )
 
 set(LIB_SOURCES
@@ -104,13 +106,15 @@ set(LIB_SOURCES
     src/hd/pppoe.c
     src/hd/hd.c
     src/isdn/cdbisdn.c
+    src/isdn/isa_probe.c
+    src/ids/hd_ids.c
 )
 
-include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd src/isdn)
+include_directories(${PROJECT_BINARY_DIR}/src/hd src/hd src/isdn src/ids)
 
 add_library(hd STATIC ${LIB_SOURCES} ${LIB_HEADERS})
 add_library(hd::hd ALIAS hd)
-target_link_libraries(hd isdn::isdn)
+target_link_libraries(hd isdn::isdn ids::ids)
 
 install(TARGETS hd
   LIBRARY DESTINATION lib
