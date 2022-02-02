@@ -1302,7 +1302,7 @@ int oem_install_info(hd_data_t *hd_data)
   pcmcia = hd_has_pcmcia(hd_data);
 
   for(hd = hd_list(hd_data, hw_display, 1, NULL); hd; hd = hd->next) {
-    for(str = hd->requires; str; str = str->next) {
+    for(str = hd->dep_requires; str; str = str->next) {
       if(!search_str_list(x11packs, str->str)) {
         add_str_list(&x11packs, str->str);
       }

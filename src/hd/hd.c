@@ -1433,7 +1433,7 @@ hd_t *free_hd_entry(hd_t *hd)
   free_hd_detail(hd->detail);
 
   free_driver_info(hd->driver_info);
-  free_str_list(hd->requires);
+  free_str_list(hd->dep_requires);
 
   free_mem(hd->modalias);
 

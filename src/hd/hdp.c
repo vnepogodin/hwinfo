@@ -809,7 +809,7 @@ void dump_normal(hd_data_t *hd_data, hd_t *h, FILE *f)
     }
   }
 
-  if((sl = h->requires)) {
+  if((sl = h->dep_requires)) {
     dump_line("Requires: %s", sl->str);
     for(sl = sl->next; sl; sl = sl->next) {
       dump_line0(", %s", sl->str);

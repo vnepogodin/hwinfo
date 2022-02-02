@@ -2585,7 +2585,7 @@ typedef struct s_hd_t {
 
   driver_info_t *driver_info;	/**< device driver info */
 
-  str_list_t *requires;		/**< packages/programs required for this hardware */
+  str_list_t *dep_requires;		/**< packages/programs required for this hardware */
 
   hal_prop_t *hal_prop;		/**< hal property list */
 

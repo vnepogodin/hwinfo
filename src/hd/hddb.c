@@ -68,7 +68,7 @@ typedef struct {
   hd_id_t cu_model;
   char *serial;
   str_list_t *driver;
-  char *requires;
+  char *dep_requires;
   unsigned hwclass;
 } hddb_search_t;
 
@@ -1439,7 +1439,7 @@ int compare_ids(hddb2_data_t *hddb, hddb_search_t *hs, hddb_entry_mask_t mask, u
           break;
 
         case he_requires:
-          str = hs->requires;
+          str = hs->dep_requires;
           break;
 
         default:
@@ -1645,7 +1645,7 @@ void complete_ids(
           break;
 
         case he_requires:
-          str = &hs->requires;
+          str = &hs->dep_requires;
           break;
 
         default:
@@ -1955,8 +1955,8 @@ void hddb_add_info(hd_data_t *hd_data, hd_t *hd)
   }
 
   if((hs.value & (1 << he_requires))) {
-    if(!hd->ref) hd->requires = free_str_list(hd->requires);
-    hd->requires = hd_split('|', hs.requires);
+    if(!hd->ref) hd->dep_requires = free_str_list(hd->dep_requires);
+    hd->dep_requires = hd_split('|', hs.dep_requires);
   }
 
   if((hs.value & (1 << he_vendor_id))) {
@@ -2049,7 +2049,7 @@ void hddb_add_info(hd_data_t *hd_data, hd_t *hd)
 
   /* get package info for compat device id */
 
-  if(!hd->requires) {
+  if(!hd->dep_requires) {
     hddb_search_t hs2 = {};
 
     hs2.vendor.id = hd->compat_vendor.id;
@@ -2061,7 +2061,7 @@ void hddb_add_info(hd_data_t *hd_data, hd_t *hd)
     hddb_search(hd_data, &hs2, 1);
 
     if((hs2.value & (1 << he_requires))) {
-      hd->requires = hd_split('|', hs2.requires);
+      hd->dep_requires = hd_split('|', hs2.dep_requires);
     }
   }
 
@@ -2559,8 +2559,8 @@ driver_info_t *isdn_driver(hd_data_t *hd_data, hd_t *hd, cdb_isdn_card *cic)
     if(civ->need_pkg && *civ->need_pkg) {
       sl0 = hd_split(',', (char *) civ->need_pkg);
       for(sl = sl0; sl; sl = sl->next) {
-        if(!search_str_list(hd->requires, sl->str)) {
-          add_str_list(&hd->requires, sl->str);
+        if(!search_str_list(hd->dep_requires, sl->str)) {
+          add_str_list(&hd->dep_requires, sl->str);
         }
       }
       free_str_list(sl0);
@@ -2761,8 +2761,8 @@ driver_info_t *dsl_driver(hd_data_t *hd_data, hd_t *hd, cdb_isdn_card *cic)
     if(civ->need_pkg && *civ->need_pkg) {
       sl0 = hd_split(',', (char *) civ->need_pkg);
       for(sl = sl0; sl; sl = sl->next) {
-        if(!search_str_list(hd->requires, sl->str)) {
-          add_str_list(&hd->requires, sl->str);
+        if(!search_str_list(hd->dep_requires, sl->str)) {
+          add_str_list(&hd->dep_requires, sl->str);
         }
       }
       free_str_list(sl0);
@@ -3023,7 +3023,7 @@ void expand_driver_info(hd_data_t *hd_data, hd_t *hd)
         }
 #if 0
         // ######## for compatibility
-        for(sl = hd->requires; sl; sl = sl->next) {
+        for(sl = hd->dep_requires; sl; sl = sl->next) {
           add_str_list(&di->x11.packages, sl->str);
         }
 #endif
