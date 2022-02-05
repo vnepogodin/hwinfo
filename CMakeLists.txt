@@ -6,13 +6,19 @@ project(hd
 
 include(GNUInstallDirs)
 
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -flto")
+
+if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+   set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -fwhole-program -fuse-linker-plugin")
+endif()
+
 add_subdirectory(src/isdn EXCLUDE_FROM_ALL)
 add_subdirectory(src/ids EXCLUDE_FROM_ALL)
 
 ###
 ### hd library
 ###
-configure_file(${PROJECT_SOURCE_DIR}/src/hd/version.h.in       ${PROJECT_BINARY_DIR}/src/hd/version.h)
+configure_file(${PROJECT_SOURCE_DIR}/src/hd/version.h.in ${PROJECT_BINARY_DIR}/src/hd/version.h)
 message(STATUS "Wrote ${PROJECT_BINARY_DIR}/src/hd/version.h")
 
 set(LIB_HEADERS
