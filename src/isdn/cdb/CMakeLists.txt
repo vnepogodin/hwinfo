@@ -7,6 +7,8 @@ add_executable(mk_isdnhwdb
    mk_isdnhwdb.c
    )
 
+target_include_directories(mk_isdnhwdb PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}../../hd)
+
 #add_custom_command(
 #    OUTPUT lex.yy.c
 #    #TARGET mk_isdnhwdb
@@ -19,6 +21,7 @@ add_executable(isdn_cdb
    cdb_read.c
    isdn_cdb.c
    )
+target_include_directories(isdn_cdb PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}../../hd)
 add_dependencies(isdn_cdb mk_isdnhwdb)
 
 add_custom_command(
