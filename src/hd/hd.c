@@ -15,7 +15,6 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
-#include <sys/mount.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/mman.h>
